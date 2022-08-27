@@ -15,15 +15,15 @@ app.post("/sign-up", (req, res) => {
 });
 
 app.post("/tweets", (req, res) => {
-  const image = users.find((value) => req.body.username === value.username);
-  const tweet = { ...req.body, avatar: image.avatar };
+  const image = users[users.length - 1].avatar;
+  const tweet = { ...req.body, avatar: image };
   tweets.push(tweet);
   res.send("OK");
 });
 
 app.get("/tweets", (req, res) => {
   const data = tweets.slice(-10);
-  res.send(data);
+  res.send(data.reverse());
 });
 
-app.listen(5000);
+app.listen(5000, () => console.log("Server running on port 5000"));
